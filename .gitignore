@@ -1,24 +1,117 @@
-# Compiled class file
-*.class
+import java.util.Scanner;
+class Main {
+  public static void main(String[] args) {
 
-# Log file
-*.log
+    //MENU 
+    System.out.println("Hello Customer :)");
+    System.out.println("PIZZA PRICE: LARGE(18'): £18.99, MEDIUM(15'): £12.99, SMALL(7'): £5.99");
+    System.out.println("EXTRA TOPPINGS COSTS £1 EXTRA. YOU CAN GET ONLY 5 EXTRA TOPPINGS");
+    System.out.println("YOU CAN ONLY ORDER 6 PIZZAS IN ONE SITTING");
+  
+    
+    // PIZZA PRICES and TOTAL
+    final float large = 18.99f;
+    final float medium = 12.99f;
+    final float small = 5.99f;
+    float total = 0.00f;
+    
 
-# BlueJ files
-*.ctxt
+    // ASKING USERS HOW MANY PIZZAS THEY WANT
+    Scanner pizzas = new Scanner(System.in);  // Create a Scanner object
+    System.out.println("How many pizzas would you like?");
+    Integer pizza_amount = pizzas.nextInt();
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+    // CHECKING IF THE USER HAS ENTERED A VALID INPUT
+    while (pizza_amount < 1 || pizza_amount > 6){
+      System.out.println("You can only order 6 pizzas in one sitting. Please try again.");
+      System.out.println("How many pizzas would you like?");
+      pizza_amount = pizzas.nextInt();
+    }
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+    for (float i = 0; i < pizza_amount; i++){
+      // ASKING USERS HOW MANY PIZZAS THEY WANT
+      Scanner size = new Scanner(System.in);  // Create a Scanner object
+      System.out.println("What size pizza would you like? L / M / S");
+      String pizza_size = size.nextLine();
+      boolean value = true;
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+      while(value){
+        if (pizza_size.equalsIgnoreCase("L")){
+          value = false;
+          total = total + large;
+          
+          // EXTRA TOPPINGS
+          Scanner choice = new Scanner(System.in);  // Create a Scanner object
+          System.out.println("Would you like extra toppings? Y / N");
+          String pizza_choice = choice.nextLine();
+          if (pizza_choice.equalsIgnoreCase("Y")){
+            Scanner toppings = new Scanner(System.in);  // Create a Scanner object
+            System.out.println("How many extra toppings would you like?");
+            Integer topping_amount = toppings.nextInt();
+            
+            // CHECKING IF THE USER HAS ENTERED A VALID INPUT
+            while (topping_amount < 1 || topping_amount > 5){
+              System.out.println("You can only order 5 extra toppings. Please try again.");
+              System.out.println("How many extra toppings would you like?");
+              topping_amount = toppings.nextInt();
+            }
+            total = total + (topping_amount * 1); 
+          } else if (pizza_choice.equalsIgnoreCase("N")){
+            System.out.println("No extra toppings");
+          } 
+        }else if (pizza_size.equalsIgnoreCase("M")){
+          value = false;
+          total = total + medium;
+          // EXTRA TOPPINGS
+          Scanner choice = new Scanner(System.in);  // Create a Scanner object
+          System.out.println("Would you like extra toppings? Y / N");
+          String pizza_choice = choice.nextLine();
+          if (pizza_choice.equalsIgnoreCase("Y")){
+            Scanner toppings = new Scanner(System.in);  // Create a Scanner object
+            System.out.println("How many extra toppings would you like?");
+            Integer topping_amount = toppings.nextInt();
+            
+            // CHECKING IF THE USER HAS ENTERED A VALID INPUT
+            while (topping_amount < 1 || topping_amount > 5){
+              System.out.println("You can only order 5 extra toppings. Please try again.");
+              System.out.println("How many extra toppings would you like?");
+              topping_amount = toppings.nextInt();}
+            
+            total = total + (topping_amount * 1); 
+          } else if (pizza_choice.equalsIgnoreCase("N")){
+            System.out.println("No extra toppings");}
+        }else if (pizza_size.equalsIgnoreCase("S")){
+          value = false;
+          total = total + small;
+          // EXTRA TOPPINGS
+          Scanner choice = new Scanner(System.in);  // Create a Scanner object
+          System.out.println("Would you like extra toppings? Y / N");
+          String pizza_choice = choice.nextLine();
+          if (pizza_choice.equalsIgnoreCase("Y")){
+            Scanner toppings = new Scanner(System.in);  // Create a Scanner object
+            System.out.println("How many extra toppings would you like?");
+            Integer topping_amount = toppings.nextInt();
+
+            // CHECKING IF THE USER HAS ENTERED A VALID INPUT
+            while (topping_amount < 1 || topping_amount > 5){
+              System.out.println("You can only order 5 extra toppings. Please try again.");
+              System.out.println("How many extra toppings would you like?");
+              topping_amount = toppings.nextInt();
+            }
+            
+            total = total + (topping_amount * 1); 
+          } else if (pizza_choice.equalsIgnoreCase("N")){
+            System.out.println("No extra toppings");}
+        }else{
+          value = true;
+          System.out.println("Invalid input. Please try again.");
+          System.out.println("What size pizza would you like? L / M / S");
+          pizza_size = size.nextLine();
+        }
+      }
+    }
+    System.out.println("Total cost for " + pizza_amount + " pizzas: £" + total);
+    
+    
+  }
+}
